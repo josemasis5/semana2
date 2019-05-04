@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Semana1</string>
+    <string name="edit_text_hint">Ingrese su nommbre</string>
+    <string name="edit_buttton">Cambiar</string>
+    <string name="new_buttton">Nuevo</string>
+    <string name="title_activity_new">NewActivity</string>
+    <string name="title_url_hint">https://www.google.com</string>
+    <string name="carga_boton">Descargar</string>
+    <string name="datos_Url">Contenido del Sitio</string>
+</resources>

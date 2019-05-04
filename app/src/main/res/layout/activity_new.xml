@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".NewActivity">
+
+    <android.support.v7.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txtTitulo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ingrese un URL"
+            android:textSize="20dp"
+            android:gravity="center"
+            />
+
+        <EditText
+            android:id="@+id/edit_Url"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/title_url_hint"
+            />
+
+        <Button
+            android:id="@+id/button_CargaUrl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/carga_boton"
+            android:layout_gravity="center"
+            />
+
+        <TextView
+            android:id="@+id/txtEtiqueta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/datos_Url"
+            android:textSize="20dp"
+            android:gravity="center"
+            />
+
+        <EditText
+            android:id="@+id/edit_UrlCont"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+
+    </android.support.v7.widget.LinearLayoutCompat>
+
+
+
+
+</android.support.design.widget.CoordinatorLayout>

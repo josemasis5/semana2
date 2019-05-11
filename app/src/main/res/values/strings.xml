@@ -6,5 +6,6 @@
     <string name="title_activity_new">NewActivity</string>
     <string name="title_url_hint">https://www.google.com</string>
     <string name="carga_boton">Descargar</string>
+    <string name="carga_botonAsync">Descargar Async</string>
     <string name="datos_Url">Contenido del Sitio</string>
 </resources>

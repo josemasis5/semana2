@@ -1,8 +1,10 @@
 package com.example.semana1;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.design.widget.FloatingActionButton;
@@ -14,6 +16,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.Response;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -105,6 +111,59 @@ public class NewActivity extends AppCompatActivity {
         return response;
     }
 
+    private class DownloadWebPageTask extends AsyncTask<String, Void, String>
+    {
+        private ProgressDialog mProgress;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            mProgress = new ProgressDialog(NewActivity.this);
+            mProgress.setMessage("Downloading website content");
+            mProgress.show();
+        }
+
+        @Override
+        protected String doInBackground(String... url) {
+            OkHttpClient client = new OkHttpClient();
+            Request request = null;
+            try {
+                request = new Request.Builder().url(url[0]).build();
+            }
+            catch (Exception e)
+            {
+                Log.i(TAC,"Error in the URL");
+                return "Download Failed";
+            }
+            Response response = null;
+            try {
+                response = client.newCall(request).execute();
+                if (response.isSuccessful())
+                {
+                    return response.body().string();
+                }
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+
+            }
+            return "Download Failed";
+        }
+
+        @Override
+        protected void onPostExecute(String result)
+        {
+            super.onPostExecute(result);
+            EditText urlRerult = (EditText) findViewById(R.id.edit_UrlCont);
+            urlRerult.setText(result);
+            mProgress.dismiss();
+        }
+
+
+    }
+
+
     private void setupUI()
     {
         Button obtienUrl = (Button) findViewById(R.id.button_CargaUrl);
@@ -128,6 +187,32 @@ public class NewActivity extends AppCompatActivity {
                 {
                     Toast.makeText(getApplicationContext(),"No Hay Internet",Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+
+        Button obtienUrlAsync = (Button) findViewById(R.id.button_CargaUrlAsync);
+        obtienUrlAsync.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //aqui va el codigo
+                if (hasInternetAccess())
+                {
+                    EditText strUrl = (EditText) findViewById(R.id.edit_Url);
+                    String urlfi = strUrl.getText().toString();
+                    //Toast.makeText(getApplicationContext(),"Hay Internet",Toast.LENGTH_SHORT).show();
+                    try {
+                        DownloadWebPageTask task = new DownloadWebPageTask();
+                        task.execute(new String[] {urlfi});
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+                else
+                {
+                    Toast.makeText(getApplicationContext(),"No Hay Internet",Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
     }

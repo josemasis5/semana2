@@ -35,6 +35,14 @@
             android:layout_gravity="center"
             />
 
+        <Button
+            android:id="@+id/button_CargaUrlAsync"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/carga_botonAsync"
+            android:layout_gravity="center"
+            />
+
         <TextView
             android:id="@+id/txtEtiqueta"
             android:layout_width="match_parent"
